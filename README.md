@@ -1,6 +1,6 @@
 # Fire (WIP)
 
-'Fire' is a cross platform game engine using CMake and Vulkan with as little external libraries as possible.
+'Fire' is a cross platform game engine using `CMake`, `Vulkan` and `Dear ImGui` with as little external libraries as possible.
 
 
 
