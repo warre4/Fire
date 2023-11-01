@@ -1,12 +1,11 @@
 ﻿
 #include <iostream>
-#include "extern/imgui/imgui.h"
 
 using namespace std;
 
 int main()
 {
-	cout << "Let's go. :D" << endl;
+	cout << "Let's go." << endl;
 
 	cin.get();
 
