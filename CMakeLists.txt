@@ -12,7 +12,7 @@ set(CMAKE_C_STANDARD_REQUIRED_ON)
 #file(GLOB_RECURSE SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c)
 #file(GLOB_RECURSE INCLUDE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h)
 
-#add_subdirectory(extern/...)
+add_subdirectory(extern/glfw)
 
 add_executable(Fire
 #           ${SRC_FILES}
@@ -24,4 +24,14 @@ add_executable(Fire
 target_include_directories(Fire
             PUBLIC
             ${CMAKE_CURRENT_SOURCE_DIR}/include/
+            ${CMAKE_CURRENT_SOURCE_DIR}/extern/imgui/
             )
+
+target_link_libraries(
+            Fire
+            PUBLIC
+            glfw
+)
+
+find_package(imgui CONFIG REQUIRED)
+target_link_libraries(Fire PRIVATE imgui::imgui)
