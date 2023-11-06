@@ -5,3 +5,12 @@
 [submodule "extern/vulkan"]
 	path = extern/vulkan
 	url = https://github.com/KhronosGroup/Vulkan-Hpp.git
+[submodule "extern/glfw"]
+	path = extern/glfw
+	url = https://github.com/glfw/glfw
+[submodule "extern/sdl"]
+	path = extern/sdl
+	url = https://github.com/libsdl-org/SDL
+[submodule "extern/vkb"]
+	path = extern/vkb
+	url = https://github.com/charles-lunarg/vk-bootstrap
