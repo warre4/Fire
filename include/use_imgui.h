@@ -1,7 +1,5 @@
 #pragma once
 
-#include <imgui.h>
-
 namespace Fire
 {
 	class UseImgui
@@ -10,6 +8,11 @@ namespace Fire
 		UseImgui() = default;
 		virtual ~UseImgui() {}
 
+		UseImgui(const UseImgui& other) = delete;
+		UseImgui(UseImgui&& other) noexcept = delete;
+		UseImgui& operator=(const UseImgui& other) = delete;
+		UseImgui& operator=(UseImgui&& other) noexcept = delete;
+
 		void Init();
 		void ShutDown();
 
@@ -17,6 +20,6 @@ namespace Fire
 		void Render() const;
 
 	private:
-
+		bool InitVulkan();
 	};
 }

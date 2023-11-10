@@ -18,7 +18,10 @@ add_executable(Fire
             )
             
 if(MSVC)
-    target_compile_options(Fire PRIVATE /Wall /sdl /std:c++20 /external:anglebrackets /fsanitize=address)
+    # disable warnings:
+    # /wd4820 -> c4820 -> 'bytes' bytes padding added after construct 'member_name'
+    # /wd4514 -> c4514 -> 'function' : unreferenced inline function has been removed
+    target_compile_options(Fire PRIVATE /Wall /wd4820 /wd4514 /sdl /std:c++20 /external:anglebrackets /fsanitize=address)
 else()
     target_compile_options(Fire PRIVATE -Wall -Wextra -Wpedantic)
 endif()
@@ -47,6 +50,7 @@ target_sources(imgui PRIVATE
             "${IMGUI_PATH}/imgui_demo.cpp"
             "${IMGUI_PATH}/imgui_draw.cpp"
             "${IMGUI_PATH}/imgui_widgets.cpp"
+            "${IMGUI_PATH}/imgui_tables.cpp"
             
             "${IMGUI_PATH}/backends/imgui_impl_glfw.cpp"
             "${IMGUI_PATH}/backends/imgui_impl_vulkan.cpp"
