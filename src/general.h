@@ -5,7 +5,7 @@
 #include <cstdint>
 #include <string>
 #include <stdexcept>
-#include <iostream> // cout for logging
+#include <iostream>
 
 constexpr char ENGINE_NAME[] = "Fire";
 constexpr char ENGINE_INITIALS[] = "F";
@@ -22,8 +22,8 @@ constexpr char ENGINE_INITIALS[] = "F";
 // GENERAL
 // ----------------------------------------------------------------------------------------------
 
-#define STR(s) std::string(s)
-#define WSTR(ws) std::wstring(ws)
+#define STR std::string
+#define WSTR std::wstring
 
 // remove unreferenced parameter warning for this parameter
 #define UNREF_PARAM(parameter) (void)parameter
@@ -48,25 +48,25 @@ constexpr const char* LOG_COLOR_WHITE       = "\033[37m";
 
 // Set log color (mostly for LOG_RAW usage)
 #define LOG_SET_COLOR(logColorMacro) std::cout << logColorMacro
-// Log without any pre or postfix
-#define LOGRAW(data)        std::cout << data
+// Log without any pre or postfix (uses last used color, to change the last used color: use LOG_SET_COLOR(LOG_COLOR_...))
+#define LOGRAW(data)         std::cout << data
 // Log an empty line
 #define LOG_EMPTY_LINE()     std::cout << "\n"
 // Log trace (color: blue)
-#define LOGT(message)        std::cout << LOG_COLOR_CYAN   << "[Trace] "          << message << "\n"
-#ifdef _DEBUG
-// Log debug (color: white)
-#define LOGD(message)        std::cout << LOG_COLOR_WHITE  << "[Debug] "          << message << "\n"
-#else
-// Log debug (empty in release mode)
-#define LOGD(message)
-#endif
-// Log info (color: white)
-#define LOGI(message)        std::cout << LOG_COLOR_WHITE  << "[Info]  "          << message << "\n"
-// Log warning (color: yellow)
-#define LOGWARN(message)     std::cout << LOG_COLOR_YELLOW << "[Warning] "        << message << "\n"
-// Log error (color: red)
-#define LOGERROR(message)    std::cout << LOG_COLOR_RED    << "[Error] "          << message << "\n"
+#define LOGT(message)        std::cout << LOG_COLOR_CYAN   << "[Trace] "                                                           << message << "\n"
+#ifdef _DEBUG																	                                                   
+// Log debug (color: white)														                                                   
+#define LOGD(message)        std::cout << LOG_COLOR_WHITE  << "[Debug] "                                                           << message << "\n"
+#else																			                                                   
+// Log debug (disabled in release mode)											                                                   
+#define LOGD(message)															                                                   
+#endif																			                                                   
+// Log info (color: white)														                                                   
+#define LOGI(message)        std::cout << LOG_COLOR_WHITE  << "[Info]  "                                                           << message << "\n"
+// Log warning (color: yellow)													                                                   
+#define LOGWARN(message)     std::cout << LOG_COLOR_YELLOW << "[Warning] "                                                         << message << "\n"
+// Log error (color: red)														                                                   
+#define LOGERROR(message)    std::cout << LOG_COLOR_RED    << "[Error] "                                                           << message << "\n"
 // Log critical error (color: red)
 #define LOGCRITICAL(message) std::cout << LOG_COLOR_RED    << "[" << LOG_COLOR_YELLOW << "Critical Error" << LOG_COLOR_RED << "] " << message << "\n"
 
