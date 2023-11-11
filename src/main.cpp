@@ -1,14 +1,9 @@
 ﻿
-#include "window.h"
-#include "use_imgui.h"
 #include "Fire.h"
 
 #include <SDL3/SDL.h>
 
-#include <iostream>
 #include <fstream>
-#include <string>
-#include <SDL_messagebox.h>
 
 
 

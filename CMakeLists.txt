@@ -73,7 +73,7 @@ target_include_directories(imgui PUBLIC
 # -----------
 
 target_include_directories(Fire PUBLIC
-            ${CMAKE_CURRENT_SOURCE_DIR}/include/
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/Fire
             ${IMGUI_PATH}/
             ${CMAKE_CURRENT_SOURCE_DIR}/extern/vulkan/Vulkan-Headers/include/
             ${CMAKE_CURRENT_SOURCE_DIR}/extern/vulkan/vkb/src/ # vulkan bootstrap

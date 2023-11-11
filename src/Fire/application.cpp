@@ -4,6 +4,12 @@
 #include "general.h"
 #include "window.h"
 
+#ifdef _DEBUG
+#define ADD_CONFIGURATION_STR + STR(", Debug mode")
+#else
+#define ADD_CONFIGURATION_STR + STR(", Release mode")
+#endif
+
 
 Fire::Application::Application(std::string name)
 	: m_Name(std::move(name))
@@ -18,7 +24,7 @@ void Fire::Application::InitializeCore()
 
 void Fire::Application::InitializeBase()
 {
-	m_pMainWindow = new Fire::Window{ Fire::WindowProps(STR("Fire Engine! :D [") + m_Name + STR("]"), 1920, 1080, true)};
+	m_pMainWindow = new Fire::Window{ Fire::WindowProps(m_Name + STR(" [Fire Engine") ADD_CONFIGURATION_STR + STR("]"), 1920, 1080, true)};
 }
 
 void Fire::Application::CleanupBase()
