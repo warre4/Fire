@@ -36,24 +36,40 @@ constexpr char ENGINE_INITIALS[] = "F";
 // LOGGING
 // ----------------------------------------------------------------------------------------------
 
+// Linux
+constexpr const char* LOG_COLOR_RESET_COLOR = "\033[0m";
+constexpr const char* LOG_COLOR_BLACK       = "\033[30m";
+constexpr const char* LOG_COLOR_RED         = "\033[31m";
+constexpr const char* LOG_COLOR_GREEN       = "\033[32m";
+constexpr const char* LOG_COLOR_YELLOW      = "\033[33m";
+constexpr const char* LOG_COLOR_BLUE        = "\033[34m";
+constexpr const char* LOG_COLOR_MAGENTA     = "\033[35m";
+constexpr const char* LOG_COLOR_CYAN        = "\033[36m";
+constexpr const char* LOG_COLOR_WHITE       = "\033[37m";
+
+// Set log color (mostly for LOG_RAW usage)
+#define LOG_SET_COLOR(logColorMacro) std::cout << logColorMacro
 // Log without any pre or postfix
-#define LOG_RAW(data)        std::cout << data
+#define LOGRAW(data)        std::cout << data
 // Log an empty line
 #define LOG_EMPTY_LINE()     std::cout << "\n"
-// Log trace
-#define LOGT(message)        std::cout << "[Trace] "          << message << "\n"
+// Log trace (color: blue)
+#define LOGT(message)        std::cout << LOG_COLOR_CYAN   << "[Trace] "          << message << "\n"
 #ifdef _DEBUG
-// Log debug
-#define LOGD(message)        std::cout << "[Debug] "          << message << "\n"
+// Log debug (color: white)
+#define LOGD(message)        std::cout << LOG_COLOR_WHITE  << "[Debug] "          << message << "\n"
 #else
 // Log debug (empty in release mode)
 #define LOGD(message)
 #endif
-// Log info
-#define LOGI(message)        std::cout << "[Info]  "          << message << "\n"
-#define LOGWARN(message)     std::cout << "[Warning] "        << message << "\n"
-#define LOGERROR(message)    std::cout << "[Error] "          << message << "\n"
-#define LOGCRITICAL(message) std::cout << "[Critical Error] " << message << "\n"
+// Log info (color: white)
+#define LOGI(message)        std::cout << LOG_COLOR_WHITE  << "[Info]  "          << message << "\n"
+// Log warning (color: yellow)
+#define LOGWARN(message)     std::cout << LOG_COLOR_YELLOW << "[Warning] "        << message << "\n"
+// Log error (color: red)
+#define LOGERROR(message)    std::cout << LOG_COLOR_RED    << "[Error] "          << message << "\n"
+// Log critical error (color: red)
+#define LOGCRITICAL(message) std::cout << LOG_COLOR_RED    << "[" << LOG_COLOR_YELLOW << "Critical Error" << LOG_COLOR_RED << "] " << message << "\n"
 
 
 

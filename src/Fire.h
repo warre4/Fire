@@ -4,8 +4,8 @@
 #include "general.h"
 #include "application.h"
 
-// Override `Initialize()` and `Cleanup()` after calling this macro to implement your own application
-#define CREATE_APPLICATION(appName, appNameStr)					\
+// Overriding `Initialize()` and `Cleanup()` is required
+#define CREATE_APPLICATION_CLASS(appName, appNameStr)			\
 class appName final : public _F Application						\
 {																\
 	public:														\
@@ -25,10 +25,10 @@ class appName final : public _F Application						\
 namespace Fire
 {
 	template <typename T>
-	concept DerivedFromApplication = std::is_base_of<_F Application, T>::value;
+	concept ConceptDerivedFromApplication = std::is_base_of<_F Application, T>::value;
 
 	// You should call DestroyApplication() as well
-	template <DerivedFromApplication T>
+	template <ConceptDerivedFromApplication T>
 	[[nodiscard]] _F Application* CreateApplication()
 	{
 		_F Application* pApp = new T();

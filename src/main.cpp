@@ -13,7 +13,7 @@
 
 
 
-CREATE_APPLICATION(Sandbox, "Sandbox");
+CREATE_APPLICATION_CLASS(Sandbox, "Sandbox");
 
 void Sandbox::Initialize()
 {
@@ -27,17 +27,17 @@ void Sandbox::Cleanup()
 
 
 
-CREATE_APPLICATION(MyOtherApp, "MyOtherApp");
-
-void MyOtherApp::Initialize()
-{
-	LOGI(GetName() + " initializing");
-}
-
-void MyOtherApp::Cleanup()
-{
-	LOGI(GetName() + " cleaning up");
-}
+//CREATE_APPLICATION_CLASS(MyOtherApp, "MyOtherApp");
+//
+//void MyOtherApp::Initialize()
+//{
+//	LOGI(GetName() + " initializing");
+//}
+//
+//void MyOtherApp::Cleanup()
+//{
+//	LOGI(GetName() + " cleaning up");
+//}
 
 
 
@@ -49,19 +49,38 @@ int main(int /*argc*/, char** /*argv*/)
 	{
 #endif
 
+		// testing logging macros
+		LOG_SET_COLOR(LOG_COLOR_MAGENTA);
+		LOGRAW("Text without pre or post fix, will not automatically go to the next line");
+		LOG_EMPTY_LINE(); // manual enter
+
+		LOGT("Example trace message");
+		LOGD("Example debug message");
+		LOGI("Example info message");
+		LOGWARN("Example info message");
+		LOGERROR("Example error message");
+		LOGCRITICAL("Example critical error message");
+
+		LOG_EMPTY_LINE();
+
+
 		// Test Application
 		_F Application* pApp = _F CreateApplication<Sandbox>();
-		_F Application* pApp2 = _F CreateApplication<MyOtherApp>();
+		//_F Application* pApp2 = _F CreateApplication<MyOtherApp>();
 
 		pApp->Run();
-		pApp2->Run();
+		//pApp2->Run();
 
 		_F DestroyApplication(pApp);
-		_F DestroyApplication(pApp2);
+		//_F DestroyApplication(pApp2);
 
 
+		
 		/*
 		// read and print delete_me.txt
+		LOG_EMPTY_LINE();
+		LOG_EMPTY_LINE();
+
 		std::ifstream ifstream;
 
 		ifstream.open(RESOURCES_PATH "delete_me.txt");
@@ -78,10 +97,10 @@ int main(int /*argc*/, char** /*argv*/)
 		char temp;
 		while (ifstream.get(temp))
 		{
-			LOG_RAW(temp);
+			LOGRAW(temp);
 		}
 		temp = '\n';
-		LOG_RAW(temp);
+		LOGRAW(temp);
 
 		LOG_EMPTY_LINE();
 		LOGT("----------------------------");
@@ -89,11 +108,12 @@ int main(int /*argc*/, char** /*argv*/)
 		ifstream.close();
 
 		LOG_EMPTY_LINE();
-		
+		LOG_EMPTY_LINE();
+		*/
 		
 		// end of program
 		LOGI("program terminated");
-		*/
+		
 
 #ifdef _DEBUG
 	}
