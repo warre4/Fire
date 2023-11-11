@@ -1,9 +1,11 @@
 #pragma once
 
 
+#include <concepts>
 #include <cstdint>
 #include <string>
 #include <stdexcept>
+#include <iostream> // cout for logging
 
 constexpr char ENGINE_NAME[] = "Fire";
 constexpr char ENGINE_INITIALS[] = "F";
@@ -34,7 +36,25 @@ constexpr char ENGINE_INITIALS[] = "F";
 // LOGGING
 // ----------------------------------------------------------------------------------------------
 
-// TODO
+// Log without any pre or postfix
+#define LOG_RAW(data)        std::cout << data
+// Log an empty line
+#define LOG_EMPTY_LINE()     std::cout << "\n"
+// Log trace
+#define LOGT(message)        std::cout << "[Trace] "          << message << "\n"
+#ifdef _DEBUG
+// Log debug
+#define LOGD(message)        std::cout << "[Debug] "          << message << "\n"
+#else
+// Log debug (empty in release mode)
+#define LOGD(message)
+#endif
+// Log info
+#define LOGI(message)        std::cout << "[Info]  "          << message << "\n"
+#define LOGWARN(message)     std::cout << "[Warning] "        << message << "\n"
+#define LOGERROR(message)    std::cout << "[Error] "          << message << "\n"
+#define LOGCRITICAL(message) std::cout << "[Critical Error] " << message << "\n"
+
 
 
 // ----------------------------------------------------------------------------------------------

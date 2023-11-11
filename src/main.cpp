@@ -1,7 +1,7 @@
 ﻿
-#include "general.h"
 #include "window.h"
 #include "use_imgui.h"
+#include "Fire.h"
 
 #include <SDL3/SDL.h>
 
@@ -11,36 +11,56 @@
 #include <SDL_messagebox.h>
 
 
-int main()
+
+
+CREATE_APPLICATION(Sandbox, "Sandbox");
+
+void Sandbox::Initialize()
+{
+	LOGI(GetName() + " initializing");
+}
+
+void Sandbox::Cleanup()
+{
+	LOGI(GetName() + " cleaning up");
+}
+
+
+
+CREATE_APPLICATION(MyOtherApp, "MyOtherApp");
+
+void MyOtherApp::Initialize()
+{
+	LOGI(GetName() + " initializing");
+}
+
+void MyOtherApp::Cleanup()
+{
+	LOGI(GetName() + " cleaning up");
+}
+
+
+
+
+int main(int /*argc*/, char** /*argv*/)
 {
 #ifdef _DEBUG
 	try
 	{
 #endif
 
-		// create window and update it until user closes it (TODO: WindowManager class)
-		glfwInit();
-#pragma warning(push)
-#pragma warning(disable : 5039) // 'function': pointer or reference to potentially throwing function passed to extern C function under -EHc. Undefined behavior may occur if this function throws an exception.
-		glfwSetErrorCallback(Fire::Window::GlfwErrorCallback);
-#pragma warning(pop)
+		// Test Application
+		_F Application* pApp = _F CreateApplication<Sandbox>();
+		_F Application* pApp2 = _F CreateApplication<MyOtherApp>();
 
-		Fire::Window* pWindow = new Fire::Window{ Fire::WindowProps("Fire Engine! :D", 1920, 1080, true)};
+		pApp->Run();
+		pApp2->Run();
 
-		while (!pWindow->GetShouldClose())
-		{
-			pWindow->Update();
-		}
-
-		SAFE_DELETE(pWindow);
-
-		glfwTerminate();
+		_F DestroyApplication(pApp);
+		_F DestroyApplication(pApp2);
 
 
-
-
-
-
+		/*
 		// read and print delete_me.txt
 		std::ifstream ifstream;
 
@@ -48,25 +68,32 @@ int main()
 
 		if (!ifstream.is_open())
 		{
-			std::cerr << "ERROR: could not open file!\n";
+			LOGWARN("ERROR: could not open file!");
 		}
 
-		std::cout << "Contents of `delete_me.txt`:\n";
-		std::cout << "----------------------------\n";
+		LOGT("Contents of `delete_me.txt`:");
+		LOGT("----------------------------");
+		LOG_EMPTY_LINE();
 
 		char temp;
 		while (ifstream.get(temp))
 		{
-			std::cout << temp;
+			LOG_RAW(temp);
 		}
-		std::cout << "\n";
+		temp = '\n';
+		LOG_RAW(temp);
+
+		LOG_EMPTY_LINE();
+		LOGT("----------------------------");
+
 		ifstream.close();
 
-		std::cout << "----------------------------\n";
-		// end of read and print delete_me.txt
-
-		std::cout << "\n\nprogram terminated, press enter to quit\n";
-		std::cin.get();
+		LOG_EMPTY_LINE();
+		
+		
+		// end of program
+		LOGI("program terminated");
+		*/
 
 #if _DEBUG
 	}

@@ -38,11 +38,3 @@ void Fire::Window::GetFramebufferSize(int* width, int* height)
 {
 	glfwGetFramebufferSize(m_pWindow, width, height);
 }
-
-
-// GLFW callback
-
-void Fire::Window::GlfwErrorCallback(int error, const char* description)
-{
-	EXCEPTION(STR("GLFW Error ") + std::to_string(error) + STR(": ") + STR(description));
-}

@@ -64,13 +64,7 @@ namespace Fire
 			glfwSetWindowTitle(m_pWindow, title.c_str());
 		}
 
-
-		// Callbacks
-
-		static void GlfwErrorCallback(int error, const char* description);
-
 	private:
-
 		WindowProps m_Props;
 		GLFWwindow* m_pWindow;
 	};
