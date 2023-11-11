@@ -95,7 +95,7 @@ int main(int /*argc*/, char** /*argv*/)
 		LOGI("program terminated");
 		*/
 
-#if _DEBUG
+#ifdef _DEBUG
 	}
 	catch (std::exception& e)
 	{
