@@ -36,7 +36,6 @@ constexpr char ENGINE_INITIALS[] = "F";
 // LOGGING
 // ----------------------------------------------------------------------------------------------
 
-// Linux
 constexpr const char* LOG_COLOR_RESET_COLOR = "\033[0m";
 constexpr const char* LOG_COLOR_BLACK       = "\033[30m";
 constexpr const char* LOG_COLOR_RED         = "\033[31m";
