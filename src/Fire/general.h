@@ -1,5 +1,6 @@
 #pragma once
 
+#include "api.h" // Fire engine API
 
 #include <concepts>
 #include <cstdint>

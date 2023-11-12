@@ -1,4 +1,6 @@
 #pragma once
+#include "api.h"
+
 #include <string>
 
 namespace Fire
@@ -11,7 +13,7 @@ namespace Fire
 
 namespace Fire
 {
-	class Application
+	class FAPI Application
 	{
 	public:
 		Application(std::string name);

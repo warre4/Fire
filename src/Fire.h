@@ -1,44 +1,49 @@
 #pragma once
+// ===============================================================
+// When a project is created:
+// ---------------------------------------------------------------
+// 1) #include "Fire.h"
+// 2) call CREATE_APPLICATION_CLASS(), then SET_MAIN_APPLICATION()
+// 
+// note: You can create multiple application classes and you can run as many applications as you want,
+//       but there has to be a root application that is automatically created and ran by the engine.
+//       The root application is defined by calling SET_MAIN_APPLICATION.
+// 
+//       running an application looks like this:
+//       
+//       Fire::Application* pApp = Fire::CreateApplication<ApplicationClass>();
+//       pApp->Run();
+//       Fire::DestroyApplication(pApp);
+// 
+// note: This code will be removed once there is a test project that calls this code
+// 
+// ===============================================================
 
-// For use by Confused applications
-#include "general.h"
-#include "application.h"
+#include "Fire/entrypoint.h"
+#include "Fire/application.h"
+#include "Fire/general.h"
+
 
 // Overriding `Initialize()` and `Cleanup()` is required
-#define CREATE_APPLICATION_CLASS(appName, appNameStr)			\
-class appName final : public _F Application						\
-{																\
-	public:														\
-		appName() : _F Application(appNameStr) {}				\
-																\
-		virtual ~appName() = default;							\
-		appName(const appName& other) = delete;					\
-		appName(appName&& other) noexcept = delete;				\
-		appName& operator=(const appName& other) = delete;		\
-		appName& operator=(appName&& other) noexcept = delete;	\
-	private:													\
-		void Initialize() override;								\
-		void Cleanup() override;								\
+#define CREATE_APPLICATION_CLASS(appName, appNameStr)          \
+class appName final : public Fire::Application                 \
+{                                                              \
+	public:                                                    \
+		appName() : Fire::Application(appNameStr) {}           \
+                                                               \
+		virtual ~appName() = default;                          \
+		appName(const appName& other) = delete;                \
+		appName(appName&& other) noexcept = delete;            \
+		appName& operator=(const appName& other) = delete;     \
+		appName& operator=(appName&& other) noexcept = delete; \
+	private:                                                   \
+		void Initialize() override;                            \
+		void Cleanup() override;                               \
 };
 
-// functions for app creation and destruction
-namespace Fire
-{
-	template <typename T>
-	concept ConceptDerivedFromApplication = std::is_base_of<_F Application, T>::value;
-
-	// You should call DestroyApplication() as well
-	template <ConceptDerivedFromApplication T>
-	[[nodiscard]] _F Application* CreateApplication()
-	{
-		_F Application* pApp = new T();
-		LOGD(pApp->GetName() + STR(" allocated in memory"));
-		return pApp;
-	}
-	void DestroyApplication(_F Application*& pApp)
-	{
-		std::string internalApplicationName = pApp->GetName();
-		SAFE_DELETE(pApp);
-		LOGD(internalApplicationName + STR(" released from memory"));
-	}
+// An instance of `ApplicationClass` will be created and run automatically
+#define SET_MAIN_APPLICATION(ApplicationClass)                 \
+Fire::Application* Fire::CreateMainApplication()               \
+{                                                              \
+	return Fire::CreateApplication<ApplicationClass>();        \
 }

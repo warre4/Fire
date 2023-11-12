@@ -1,8 +1,9 @@
 #pragma once
+#include "api.h"
 
 namespace Fire
 {
-	class UseImgui
+	class FAPI UseImgui
 	{
 	public:
 		UseImgui() = default;

@@ -16,6 +16,7 @@ Fire::Core::Core()
 
 	// done
 	LOGI("Core initialized");
+	LOG_EMPTY_LINE();
 }
 
 // Destroy Core
@@ -26,6 +27,7 @@ Fire::Core::~Core()
 
 
 	// done
+	LOG_EMPTY_LINE();
 	LOGI("Core destroyed (press enter to exit ...)");
 	std::cin.get();
 }

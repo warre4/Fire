@@ -1,4 +1,7 @@
 #pragma once
+
+#include "api.h"
+
 #include <string>
 #include <cstdint>
 
@@ -12,7 +15,7 @@
 namespace Fire
 {
 #pragma pack()
-	struct WindowProps
+	struct FAPI WindowProps
 	{
 		std::string Title;
 		int Width;
@@ -27,7 +30,7 @@ namespace Fire
 		{}
 	};
 
-	class Window
+	class FAPI Window
 	{
 	public:
 		Window(const WindowProps& props);
