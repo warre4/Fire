@@ -12,7 +12,7 @@ Fire::Window::Window(const WindowProps& props)
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 	glfwWindowHint(GLFW_RESIZABLE, props.IsResizable);
 
-	m_pWindow = glfwCreateWindow(props.Width, props.Height, props.Title.c_str(), nullptr, nullptr);
+	m_pWindow = glfwCreateWindow(props.Width, props.Height, props.Title, nullptr, nullptr);
 }
 
 Fire::Window::~Window()

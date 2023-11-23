@@ -15,8 +15,6 @@
 //       pApp->Run();
 //       Fire::DestroyApplication(pApp);
 // 
-// note: This code will be removed once there is a test project that calls this code
-// 
 // ===============================================================
 
 #include "Fire/entrypoint.h"

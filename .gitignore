@@ -1,4 +1,6 @@
 .git
 .vs
-bin
-out
+*bin/
+*lib/
+*out/
+*vulkan-1.lib

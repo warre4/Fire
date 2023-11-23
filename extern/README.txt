@@ -1,0 +1,1 @@
+Download the VulkanSDK from https://vulkan.lunarg.com/sdk/home (I used version 1.3.268.0) and copy `vulkan-1.lib` (or linux equivalent) next to this text file.

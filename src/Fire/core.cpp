@@ -1,5 +1,7 @@
 #include "core.h"
 
+#include <string>
+
 #include "general.h"
 #include "window.h"
 

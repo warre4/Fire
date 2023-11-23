@@ -2,8 +2,6 @@
 #include "general.h"
 #include "application.h"
 
-#include <SDL3/SDL_messagebox.h>
-
 
 // functions for app creation and destruction
 namespace Fire
@@ -50,12 +48,12 @@ int main(int /*argc*/, char** /*argv*/)
 	}
 	catch (std::exception& e)
 	{
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Exception", e.what(), NULL);
+		_F_UTILS ShowMessageBoxError("Exception", e.what());
 		return EXIT_FAILURE;
 	}
 	catch (...)
 	{
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Exception", "Exception of an undetermined type", NULL);
+		_F_UTILS ShowMessageBoxError("Exception", "Exception of an undetermined type");
 		return EXIT_FAILURE;
 	}
 #endif

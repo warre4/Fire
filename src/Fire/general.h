@@ -2,9 +2,11 @@
 
 #include "api.h" // Fire engine API
 
+#include "utils.h"
+#include "stl_containers.h"
+
 #include <concepts>
 #include <cstdint>
-#include <string>
 #include <stdexcept>
 #include <iostream>
 
@@ -17,6 +19,7 @@ constexpr char ENGINE_INITIALS[] = "F";
 // ----------------------------------------------------------------------------------------------
 
 #define _F ::Fire::
+#define _F_UTILS ::Fire::Utils::
 
 
 // ----------------------------------------------------------------------------------------------
@@ -87,7 +90,7 @@ constexpr const char* LOG_COLOR_WHITE       = "\033[37m";
 // ----------------------------------------------------------------------------------------------
 
 // Put this over a function that produces a VkResult to check the result
-#define CHECK(vkResult, message)                                                                \
+#define F_VK_CHECK(vkResult, message)                                                           \
 {                                                                                               \
 	VkResult temporaryResultInMacro = vkResult;                                                 \
 	if (temporaryResultInMacro != VK_SUCCESS)                                                   \

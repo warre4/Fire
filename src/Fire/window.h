@@ -2,7 +2,8 @@
 
 #include "api.h"
 
-#include <string>
+#include "stl_containers.h"
+
 #include <cstdint>
 
 #include <imgui.h>
@@ -17,12 +18,12 @@ namespace Fire
 #pragma pack()
 	struct FAPI WindowProps
 	{
-		std::string Title;
+		const char* Title;
 		int Width;
 		int Height;
 		bool IsResizable;
 
-		WindowProps(std::string title = "Placeholder Title", int width = 1600, int height = 900, bool isResizable = false)
+		WindowProps(const char* title = "Placeholder Title", int width = 1600, int height = 900, bool isResizable = false)
 			: Title{ std::move(title) }
 			, Width{ width }
 			, Height{ height }
@@ -58,13 +59,13 @@ namespace Fire
 		[[nodiscard]] inline const GLFWwindow* GetWindow() const noexcept { return m_pWindow; }
 		[[nodiscard]] inline int GetWidth() const noexcept { return m_Props.Width; }
 		[[nodiscard]] inline int GetHeight() const noexcept { return m_Props.Height; }
-		[[nodiscard]] inline const std::string& GetTitle() const noexcept { return m_Props.Title; }
+		[[nodiscard]] inline const char* GetTitle() const noexcept { return m_Props.Title; }
 		[[nodiscard]] inline const WindowProps& GetProperties() const noexcept { return m_Props; }
 
-		void SetTitle(const std::string& title)
+		void SetTitle(const char* title)
 		{
 			m_Props.Title = title;
-			glfwSetWindowTitle(m_pWindow, title.c_str());
+			glfwSetWindowTitle(m_pWindow, title);
 		}
 
 	private:

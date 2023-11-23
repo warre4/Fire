@@ -1,7 +1,7 @@
 #pragma once
 #include "api.h"
 
-#include <string>
+#include "stl_containers.h"
 
 namespace Fire
 {
@@ -16,7 +16,7 @@ namespace Fire
 	class FAPI Application
 	{
 	public:
-		Application(std::string name);
+		Application(const char* name);
 
 		virtual ~Application() = default;
 		Application(const Application& other) = delete;
@@ -27,7 +27,7 @@ namespace Fire
 		void Run();
 
 		// Helpers
-		[[nodiscard]] inline const std::string& GetName() const noexcept { return m_Name; }
+		[[nodiscard]] inline const char* GetName() const noexcept { return m_Name; }
 
 	protected:
 		virtual void Initialize() = 0;
@@ -40,7 +40,7 @@ namespace Fire
 		void CleanupBase();
 		void InitializeCore(); // Makes sure that the core is alive (creates it if it is not)
 
-		std::string m_Name;
+		const char* m_Name;
 		Fire::Window* m_pMainWindow;
 	};
 }

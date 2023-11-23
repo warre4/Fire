@@ -11,8 +11,8 @@
 #endif
 
 
-Fire::Application::Application(std::string name)
-	: m_Name(std::move(name))
+Fire::Application::Application(const char* name)
+	: m_Name(name)
 {
 	InitializeCore();
 }
@@ -24,7 +24,7 @@ void Fire::Application::InitializeCore()
 
 void Fire::Application::InitializeBase()
 {
-	m_pMainWindow = new Fire::Window{ Fire::WindowProps(m_Name + STR(" [Fire Engine") ADD_CONFIGURATION_STR + STR("]"), 1920, 1080, true)};
+	m_pMainWindow = new Fire::Window{ Fire::WindowProps(STR(m_Name + STR(" [Fire Engine") ADD_CONFIGURATION_STR + STR("]")).c_str(), 1920, 1080, true)};
 }
 
 void Fire::Application::CleanupBase()
