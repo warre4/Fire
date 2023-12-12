@@ -3,14 +3,19 @@
 
 #include <fstream>
 
-CREATE_APPLICATION_CLASS(TestProject, "TestProject");
+CREATE_APPLICATION_CLASS(TestProject, "TestProject",
+	_F Window* m_pExtraWindow = nullptr;
+	);
 SET_MAIN_APPLICATION(TestProject)
 
 void TestProject::Initialize()
 {
+
 	//LOGI(GetName() + " initializing, hello! :D");
 
-	bool shouldTestLogging = true;
+	GetWindow()->SetTitle("This is a custom title :D");
+
+	bool shouldTestLogging = false;
 	bool shouldPrintTextFile = false;
 
 	if (shouldTestLogging)
@@ -71,9 +76,13 @@ void TestProject::Initialize()
 
 		LOG_EMPTY_LINE();
 	}
+
+	m_pExtraWindow = new _F Window(_F WindowProps(400, 200), "another window :D");
 }
 
 void TestProject::Cleanup()
 {
+	SAFE_DELETE(m_pExtraWindow);
+
 	_F_UTILS ShowMessageBoxInfo(GetName(), "Bye bye :D");
 }

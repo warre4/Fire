@@ -1,6 +1,7 @@
 ﻿
 #include "general.h"
 #include "application.h"
+#include "utils.h"
 
 
 // functions for app creation and destruction

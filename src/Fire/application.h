@@ -2,6 +2,10 @@
 #include "api.h"
 
 #include "stl_containers.h"
+#include "window.h"
+
+#include <string_view>
+
 
 namespace Fire
 {
@@ -16,7 +20,7 @@ namespace Fire
 	class FAPI Application
 	{
 	public:
-		Application(const char* name);
+		Application(const char* const name);
 
 		virtual ~Application() = default;
 		Application(const Application& other) = delete;
@@ -26,8 +30,21 @@ namespace Fire
 
 		void Run();
 
-		// Helpers
+
+		// Getters & Setters
+
 		[[nodiscard]] inline const char* GetName() const noexcept { return m_Name; }
+		[[nodiscard]] inline Window* GetWindow() const noexcept { return m_pMainWindow; }
+
+		inline void SetWindowTitle(const char* title) const { m_pMainWindow->SetTitle(title); }
+		inline void SetWindowWidthHeight(int width, int height) const { m_pMainWindow->SetWindowWidthHeight(width, height); };
+		inline void SetWindowWidth(int width) const { m_pMainWindow->SetWindowWidth(width); };
+		inline void SetWindowHeight(int height) const { m_pMainWindow->SetWindowHeight(height); };
+
+
+		// Helpers
+		
+
 
 	protected:
 		virtual void Initialize() = 0;
@@ -40,7 +57,7 @@ namespace Fire
 		void CleanupBase();
 		void InitializeCore(); // Makes sure that the core is alive (creates it if it is not)
 
-		const char* m_Name;
+		const char* const m_Name; // Cannot change after initialization
 		Fire::Window* m_pMainWindow;
 	};
 }

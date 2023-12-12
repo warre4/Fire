@@ -2,6 +2,10 @@
 
 #include <string>
 
+#define GLFW_INCLUDE_NONE
+#define GLFW_INCLUDE_VULKAN
+#include <GLFW/glfw3.h>
+
 #include "general.h"
 #include "window.h"
 
@@ -39,5 +43,5 @@ Fire::Core::~Core()
 
 void Fire::Core::GlfwErrorCallback(int error, const char* description)
 {
-	EXCEPTION(STR("GLFW Error ") + std::to_string(error) + STR(": ") + STR(description));
+	EXCEPTION("GLFW Error " + std::to_string(error) + ": " + description);
 }

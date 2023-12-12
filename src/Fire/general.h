@@ -2,13 +2,13 @@
 
 #include "api.h" // Fire engine API
 
-#include "utils.h"
 #include "stl_containers.h"
 
 #include <concepts>
 #include <cstdint>
 #include <stdexcept>
 #include <iostream>
+#include <string_view>
 
 constexpr char ENGINE_NAME[] = "Fire";
 constexpr char ENGINE_INITIALS[] = "F";
@@ -26,8 +26,17 @@ constexpr char ENGINE_INITIALS[] = "F";
 // GENERAL
 // ----------------------------------------------------------------------------------------------
 
+#ifdef _DEBUG
+#define CONFIGURATION_STR "Debug"
+#else
+#define CONFIGURATION_STR "Release"
+#endif
+
 #define STR std::string
 #define WSTR std::wstring
+
+#define STR_V std::string_view
+#define WSTR_V std::wstring_view
 
 // remove unreferenced parameter warning for this parameter
 #define UNREF_PARAM(parameter) (void)parameter
@@ -95,23 +104,4 @@ constexpr const char* LOG_COLOR_WHITE       = "\033[37m";
 	VkResult temporaryResultInMacro = vkResult;                                                 \
 	if (temporaryResultInMacro != VK_SUCCESS)                                                   \
 		RTE(STR(message) + " \nError: " + std::to_string(int(temporaryResultInMacro)));         \
-}
-
-
-// ----------------------------------------------------------------------------------------------
-// TYPEDEFS
-// ----------------------------------------------------------------------------------------------
-
-typedef unsigned char Byte;
-
-
-// ----------------------------------------------------------------------------------------------
-// ENUMS
-// ----------------------------------------------------------------------------------------------
-
-namespace Fire
-{
-	// add enums here
-
-	
 }

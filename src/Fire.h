@@ -18,12 +18,10 @@
 // ===============================================================
 
 #include "Fire/entrypoint.h"
-#include "Fire/application.h"
-#include "Fire/general.h"
 
 
 // Overriding `Initialize()` and `Cleanup()` is required
-#define CREATE_APPLICATION_CLASS(appName, appNameStr)          \
+#define CREATE_APPLICATION_CLASS(appName, appNameStr, memberVariableList) \
 class appName final : public Fire::Application                 \
 {                                                              \
 	public:                                                    \
@@ -37,6 +35,7 @@ class appName final : public Fire::Application                 \
 	private:                                                   \
 		void Initialize() override;                            \
 		void Cleanup() override;                               \
+		memberVariableList                                     \
 };
 
 // An instance of `ApplicationClass` will be created and run automatically

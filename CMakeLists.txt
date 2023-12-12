@@ -32,10 +32,10 @@ if(MSVC)
     # /wd4710 -> c4710 -> 'function' : function not inlined
     # /wd4711 -> c4711 -> function 'function' selected for inline expansion
     if(CMAKE_BUILD_TYPE MATCHES Debug)
-        target_compile_options(Fire PRIVATE /Wall /wd4820 /wd4514 /wd4710 /wd4711 /sdl /std:c++20 /MDd /external:anglebrackets /external:W0 /fsanitize=address)
+        target_compile_options(Fire PRIVATE /Wall /wd4820 /wd4514 /wd4710 /wd4711 /sdl /std:c++20 /MDd /external:anglebrackets /external:I ${CMAKE_CURRENT_SOURCE_DIR}/extern/; /external:W0 /fsanitize=address)
         message(STATUS "compiler using debug options")
     else()
-        target_compile_options(Fire PRIVATE /Wall /wd4820 /wd4514 /wd4710 /wd4711 /sdl /std:c++20 /MD /external:anglebrackets /external:W0)
+        target_compile_options(Fire PRIVATE /Wall /wd4820 /wd4514 /wd4710 /wd4711 /sdl /std:c++20 /MD /external:anglebrackets /external:I ${CMAKE_CURRENT_SOURCE_DIR}/extern/; /external:W0)
         message(STATUS "compiler using release options")
     endif()
 else()

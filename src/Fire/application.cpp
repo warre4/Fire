@@ -1,17 +1,15 @@
 #include "application.h"
 
+#define GLFW_INCLUDE_NONE
+#define GLFW_INCLUDE_VULKAN
+#include <GLFW/glfw3.h>
+
 #include "core.h"
 #include "general.h"
 #include "window.h"
 
-#ifdef _DEBUG
-#define ADD_CONFIGURATION_STR + STR(", Debug mode")
-#else
-#define ADD_CONFIGURATION_STR + STR(", Release mode")
-#endif
 
-
-Fire::Application::Application(const char* name)
+Fire::Application::Application(const char* const name)
 	: m_Name(name)
 {
 	InitializeCore();
@@ -24,7 +22,8 @@ void Fire::Application::InitializeCore()
 
 void Fire::Application::InitializeBase()
 {
-	m_pMainWindow = new Fire::Window{ Fire::WindowProps(STR(m_Name + STR(" [Fire Engine") ADD_CONFIGURATION_STR + STR("]")).c_str(), 1920, 1080, true)};
+	m_pMainWindow = new Fire::Window{ Fire::WindowProps(1920, 1080, true), (STR(m_Name) + " [Fire Engine, " + CONFIGURATION_STR + " mode]").c_str() };
+	m_pMainWindow->SetIcon(FENGINE_RESOURCES_PATH "icons/FireIcon_32x32.png");
 }
 
 void Fire::Application::CleanupBase()
@@ -43,6 +42,7 @@ void Fire::Application::Run()
 
 	while (shouldContinue)
 	{
+		glfwPollEvents(); // TODO: this should only be called on the main thread (frequency of calls should also be looked into), make it safe (no multithreading yet but could bring problems in the future)
 		m_pMainWindow->Update();
 
 		if (m_pMainWindow->GetShouldClose() == GLFW_TRUE)
